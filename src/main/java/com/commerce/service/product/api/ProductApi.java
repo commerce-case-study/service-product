@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.commerce.service.product.dao.ProductDao;
-import com.commerce.service.product.entities.Product;
+import com.commerce.service.product.dao.ItemDao;
+import com.commerce.service.product.entities.Item;
 
 @RestController
 public class ProductApi {
@@ -18,17 +18,17 @@ public class ProductApi {
     Logger logger = LoggerFactory.getLogger(ProductApi.class);
     
     @Autowired
-    ProductDao productDao;
+    ItemDao itemDao;
     
-    @PostMapping(value = "addProduct", consumes = "application/json")
-    public Long addProduct(@RequestBody Product product) {
-        productDao.save(product);
+    @PostMapping(value = "addItem", consumes = "application/json")
+    public Long addItem(@RequestBody Item product) {
+        itemDao.save(product);
         return product.getId();
     }
     
-    @GetMapping(value = "findProductById/{id}", produces = "application/json")
-    public Product addProduct(@PathVariable Long id) {
-        return productDao.findById(id).orElse(null);
+    @GetMapping(value = "findItemById/{id}", produces = "application/json")
+    public Item findItemById(@PathVariable Long id) {
+        return itemDao.findById(id).orElse(null);
     }
 
 }
